@@ -1,16 +1,16 @@
-import { Select, Space } from 'antd'
+import { Select } from 'antd'
 import React from 'react'
 
-const SelectUI = () => {
+const SelectUI: React.FC = () => {
   return (
-    <Space direction="vertical" style={{ width: '100%' }}>
         <Select
           // size={size}
           defaultValue="Alabama"
           // onChange={handleChange}
           // options={options}
+          style={{ width: '100%' }}
         />
-    </Space>
+
   )
 }
 

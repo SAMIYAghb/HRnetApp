@@ -1,5 +1,5 @@
-import { Button, Flex } from "antd";
-
+import { Button } from "antd";
+import '../../App.css'
 // const ButtonUI = ({ ...propsAntDesign }) => {
 //   return (
 //     <Button {...propsAntDesign} />
@@ -7,11 +7,10 @@ import { Button, Flex } from "antd";
 // }
 const ButtonUI = () =>{
   return(
-    <Flex vertical gap="small" style={{ width: '100%' }}>
-    <Button type="primary" block>
-      Primary
+    <Button type="primary" block className="submit_btn">
+      Save
     </Button>
-    </Flex>
+
   )
 }
 export default ButtonUI

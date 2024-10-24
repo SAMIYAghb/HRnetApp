@@ -6,11 +6,8 @@ const onChange: DatePickerProps['onChange'] = (date, dateString) => {
   console.log(date, dateString);
 };
 
-const DatePickerUI = () => (
-  <Space direction="vertical">
-    <DatePicker onChange={onChange} />
-
-  </Space>
+const DatePickerUI: React.FC = () => (
+    <DatePicker onChange={onChange} style={{ width: '100%' }}/>
 );
 
 export default DatePickerUI;
