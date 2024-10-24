@@ -1,4 +1,4 @@
-const department = [
+const department: string[] = [
     "Sales",
     "Marketing",
     "Engineering",

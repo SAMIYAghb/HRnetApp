@@ -6,10 +6,28 @@ import ModalUI from "../../components/Modal/ModalUI";
 import SelectUI from "../../components/Select/SelectUI";
 import { Link } from "react-router-dom";
 import '../../App.css'
+import { useSelector } from 'react-redux';
+import { selectDepartments } from '../../redux/slices/DepatementSlice'
+import { selectStates } from "../../redux/slices/StateSlice";
+
+
 
 const CreateEmployeesPage: React.FC = () => {
+  const departments = useSelector(selectDepartments);
+  // console.log(departments);
+
+  const states = useSelector(selectStates);
+  // console.log(states)
+  // Extraire les noms des États
+  const stateNames = states.map(state => state.name);   
+  // console.log(stateNames)
+
+  if (!departments || departments.length === 0 || !states || states.length === 0) {
+    return <div>Loading...</div>; // Ou un autre indicateur de chargement
+  }
+
+
   return (
-    // <Flex gap="middle" vertical>
     <div className="create_employee">
       <div className="title_container">
         <h1>HRnet</h1>
@@ -59,7 +77,7 @@ const CreateEmployeesPage: React.FC = () => {
           </div>
           <div className="input_item">
             <label htmlFor="employeeState">State</label>
-            <SelectUI />
+            <SelectUI options={stateNames}/>
           </div>
           <div className="input_item">
             <label htmlFor="employeeZipCode">Zip Code</label>
@@ -70,17 +88,15 @@ const CreateEmployeesPage: React.FC = () => {
             />
           </div>
         </div>
-
         <div className="input_item">
             <label htmlFor="employeeDepartment">Department</label>
-            <SelectUI />
+            <SelectUI options={departments}/>
           </div>
         <ButtonUI />
       </Form>
 
       <ModalUI />
     </div>
-    // </Flex>
   );
 };
 
