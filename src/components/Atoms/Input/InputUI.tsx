@@ -1,32 +1,37 @@
-import { Form, Input, InputNumber } from "antd";
+import { Input, InputNumber } from "antd";
 import { Rule } from "antd/lib/form";
 
 interface InputUIProps {
   name: string;
   rules?: Rule[];
   type?: "text" | "number";
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  value: string | number;
 }
 
-const InputUI: React.FC<InputUIProps> = ({name, rules, type = "text", ...rest }) => {
-  return  (
-    <Form.Item name={name} rules={rules}>
-      {type === "number" ? (
+const InputUI: React.FC<InputUIProps> = ({name, type = "text", onChange, onBlur, value }) => {
+  return  type === "number" ? (
         <InputNumber
           min={1}
+          name={name}
+          value={value as number}
+          onChange={(val) =>
+            onChange({
+              target: { value: val ?? 0, name } // Valeur par défaut si null
+            } as unknown as React.ChangeEvent<HTMLInputElement>)
+          }
+          onBlur={onBlur}
           style={{ width: "100%" }}
-          onKeyPress={(event) => {
-            if (!/[0-9]/.test(event.key)) {
-              event.preventDefault(); // Empêche la saisie des lettres
-            }
-          }}
-          {...rest}
         />
       ) : (
-        <Input {...rest} />
+        <Input 
+        name={name}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}/>
       )}
-    </Form.Item>
-  );
-};
+
 export default InputUI;
 
 // const InputUI = React.forwardRef<InputRef, InputProps>((propsAntDesign, ref) => (

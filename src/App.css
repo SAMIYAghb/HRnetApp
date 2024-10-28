@@ -13,37 +13,28 @@
   gap: 15px;
   margin: 20px;
 }
+
 .create_employee{
-  width: 400px;
+  width: 600px;
 }
 
 .adress_item{
-  border: 1px solid #ededed;
-  border-radius: 2px;
-  padding:0 10px;
+  border: 2px solid #ededed;
+  border-radius: 5px;
+  padding:0 50px 0 10px;
   margin-bottom: 25px;
 }
 
-.adress_title{
-  padding: 10px 0;
-}
 .input_item{
   background-color: #ededed;
   border-radius: 5px;
   margin-bottom: 25px;
-  padding: 0;
+  padding: 10px 0 0;
 }      
 
 :where(.css-dev-only-do-not-override-ni1kz0).ant-form-item{
   margin-bottom: 0;
 }
-
-label{
-  padding:8px;
-}
-
-
-
 
 .container{
   width: 1000px;
@@ -51,4 +42,18 @@ label{
   flex-direction: column;
   justify-content: center;
   gap: 20px; 
+}
+
+.label , .adress_title{
+  font-weight: 600; 
+  padding: 15px;
+  color: #333; 
+  font-size: 16px; 
+}
+
+.error-message {
+  color: red; 
+  font-size: 0.875rem; 
+  margin-top: 0.25rem; 
+  padding: 10px;
 }

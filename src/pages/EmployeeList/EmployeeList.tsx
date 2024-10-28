@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import TableUI from "../../components/Table/TableUI";
+// import TableUI from "../../components/Atoms/Table/TableUI";
 
 const EmployeeList = () => {
   return (
@@ -12,7 +12,7 @@ const EmployeeList = () => {
           <div className="entries"></div>
           <div className="search"></div>
         </div>
-        <TableUI />
+        {/* <TableUI /> */}
         <div className="pagination">
           <div className="count"></div>
           <div className="page_number"></div>

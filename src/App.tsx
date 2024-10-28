@@ -2,6 +2,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import BaseLayout from "./components/BaseLayout/BaseLayout";
 import CreateEmployeesPage from "./pages/CreateEmployeesPage/CreateEmployeesPage";
 import EmployeeList from "./pages/EmployeeList/EmployeeList";
+// import 'antd/dist/antd.css';
 
 const App = () => {
   return (
