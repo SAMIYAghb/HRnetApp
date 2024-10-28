@@ -12,13 +12,13 @@ interface SelectFieldProps {
   value: string;
   options: Option[];
   onChange?: (value: string) => void;
+  defaultValue?: string;
 }
 
 const SelectField: React.FC<SelectFieldProps> = ({ label, options, onChange }) => (
   <div className="input_item">
     <LabelUI text={label} />
     <SelectUI 
-    
     options={options} 
     onChange={onChange} />
   </div>

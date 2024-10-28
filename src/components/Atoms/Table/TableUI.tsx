@@ -1,143 +1,47 @@
-// import React from 'react';
-// import { Table } from 'antd';
-// import type { TableColumnsType, TableProps } from 'antd';
+import { Table } from "antd";
+import dayjs from "dayjs";
+import React from "react";
+interface DataType {
+  firstName: string;
+  lastName: string;
+  startDate: string;
+  department: string;
+  dateOfBirth: string;
+  street: string;
+  city: string;
+  state: string;
+  zipCode: string;
+}
 
-// interface DataType {
-//   key: React.Key;
-//   name: string;
-//   chinese: number;
-//   math: number;
-//   english: number;
-// }
-
-// const columns: TableColumnsType<DataType> = [
-//   {
-//     title: 'First Name',
-//     dataIndex: 'name',
-//     sorter: {
-//       compare: (a, b) => a.chinese - b.chinese,
-//       multiple: 3,
-//     },
-//   },
-//   {
-//     title: 'Last Name',
-//     dataIndex: 'chinese',
-//     sorter: {
-//       compare: (a, b) => a.chinese - b.chinese,
-//       multiple: 3,
-//     },
-//   },
-//   {
-//     title: 'Start Date',
-//     dataIndex: 'math',
-//     sorter: {
-//       compare: (a, b) => a.math - b.math,
-//       multiple: 2,
-//     },
-//   },
-//   {
-//     title: 'Departement',
-//     dataIndex: 'english',
-//     sorter: {
-//       compare: (a, b) => a.english - b.english,
-//       multiple: 1,
-//     },
-//   },
-//   {
-//     title: 'Date of Birth',
-//     dataIndex: 'english',
-//     sorter: {
-//       compare: (a, b) => a.english - b.english,
-//       multiple: 1,
-//     },
-//   },
-//   {
-//     title: 'Street',
-//     dataIndex: 'english',
-//     sorter: {
-//       compare: (a, b) => a.english - b.english,
-//       multiple: 1,
-//     },
-//   },
-//   {
-//     title: 'City',
-//     dataIndex: 'english',
-//     sorter: {
-//       compare: (a, b) => a.english - b.english,
-//       multiple: 1,
-//     },
-//   },
-//   {
-//     title: 'State',
-//     dataIndex: 'english',
-//     sorter: {
-//       compare: (a, b) => a.english - b.english,
-//       multiple: 1,
-//     },
-//   },
-//   {
-//     title: 'Zip Code',
-//     dataIndex: 'english',
-//     sorter: {
-//       compare: (a, b) => a.english - b.english,
-//       multiple: 1,
-//     },
-//   },
-// ];
-
-// const data: DataType[] = [
-//   {
-//     key: '1',
-//     name: 'John Brown',
-//     chinese: 98,
-//     math: 60,
-//     english: 70,
-//   },
-//   {
-//     key: '2',
-//     name: 'Jim Green',
-//     chinese: 98,
-//     math: 66,
-//     english: 89,
-//   },
-//   {
-//     key: '3',
-//     name: 'Joe Black',
-//     chinese: 98,
-//     math: 90,
-//     english: 70,
-//   },
-//   {
-//     key: '4',
-//     name: 'Jim Red',
-//     chinese: 88,
-//     math: 99,
-//     english: 89,
-//   },
-// ];
+interface TableUIProps {
+  data: DataType[];
+  onChange?: (pagination: any, filters: any, sorter: any) => void;
+}
 
 // const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {
 //   console.log('params', pagination, filters, sorter, extra);
 // };
 
-// const TableUI: React.FC = () => {
-//   return (
-//     <Table<DataType> columns={columns} dataSource={data} onChange={onChange} />
-//   )
-// }
+const columns = [
+    { title: "First Name", dataIndex: "firstName", key: "firstName" },
+    { title: "Last Name", dataIndex: "lastName", key: "lastName" },
+    { title: "Start Date", dataIndex: "startDate", key: "startDate",
+        render: (date: string) => dayjs(date).format("DD/MM/YYYY"),
+     },
+    { title: "Department", dataIndex: "department", key: "department"},
+    { title: "Date of Birth", dataIndex: "dateOfBirth", key: "dateOfBirth",
+        render: (date: string) => dayjs(date).format("DD/MM/YYYY"),
+     },
+    { title: "Street", dataIndex: "street", key: "street" },
+    { title: "City", dataIndex: "city", key: "city" },
+    { title: "State", dataIndex: "state", key: "state" },
+    { title: "Zip Code", dataIndex: "zipCode", key: "zipCode" },
+  ];
 
-// export default TableUI
+const TableUI: React.FC<TableUIProps> = ({ data, onChange }) => {
+  return (
+    <Table columns={columns} dataSource={data} onChange={onChange} rowKey="zipCode"/>
+  );
+};
 
-
-
-// columns: [
-//   { title: 'First Name', data: 'firstName' },
-//   { title: 'Last Name', data: 'lastName' },
-//   { title: 'Start Date', data: 'startDate' },
-//   { title: 'Department', data: 'department' },
-//   { title: 'Date of Birth', data: 'dateOfBirth' },
-//   { title: 'Street', data: 'street' },
-//   { title: 'City', data: 'city' },
-//   { title: 'State', data: 'state' },
-//   { title: 'Zip Code', data: 'zipCode' },
-// ]
+export default TableUI;

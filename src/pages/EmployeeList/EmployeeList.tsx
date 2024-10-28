@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
-// import TableUI from "../../components/Atoms/Table/TableUI";
+import TableUI from "../../components/Atoms/Table/TableUI";
+import { RootState } from '../../redux/store';
+import { useSelector } from "react-redux";
+
 
 const EmployeeList = () => {
+  const employees = useSelector((state: RootState) => state.employees.employees);
+
   return (
     <>
       <div className="title_container">
@@ -12,12 +17,14 @@ const EmployeeList = () => {
           <div className="entries"></div>
           <div className="search"></div>
         </div>
-        {/* <TableUI /> */}
-        <div className="pagination">
+        <TableUI data={employees} />
+        {/* <div className="pagination">
           <div className="count"></div>
           <div className="page_number"></div>
-        </div>
+        </div> */}
+
         <Link to="/">Home</Link>
+        
       </div>
     </>
   );
