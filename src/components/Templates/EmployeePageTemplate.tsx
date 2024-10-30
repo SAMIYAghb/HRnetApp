@@ -7,7 +7,7 @@ const EmployeePageTemplate: React.FC = () => (
   <div className="create_employee">
     <div className="title_container">
       <h1>HRnet</h1>
-      <Link to="/employee-list">Current Employees</Link>
+      <Link to="/employee-list">View Current Employees</Link>
       <h2>Create Employee</h2>
       <EmployeeForm />
     </div>

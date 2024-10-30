@@ -7,11 +7,6 @@ const BaseLayout = () => {
     <main className="main">
       <Outlet/>
     </main>
-    // <Row justify="center" >
-    //   <Col span={6}>
-    //     <Outlet />
-    //   </Col>
-    // </Row>
   );
 };
 

@@ -1,33 +1,21 @@
-// import React, { useState } from 'react';
-// import { Button, Modal } from 'antd';
+import { Modal } from "antd";
+import ButtonUI from "../Button/Button";
 
-// const ModalUI = () => {
-//   const [isModalOpen, setIsModalOpen] = useState(false);
+interface ModalUIProps {
+  title: string;
+  paragraph: string;
+  onClose: () => void;
+  open: boolean;
+}
+const ModalUI: React.FC<ModalUIProps> = ({ title, paragraph, onClose, open  }) => {
+  return (
+    <>
+      <Modal title={title} open={open}onCancel={onClose} footer={null}>
+        <p className="modal_parag">{paragraph}</p>
+        <ButtonUI text="Close" onClick={onClose} />
+      </Modal>
+    </>
+  );
+};
 
-//   const showModal = () => {
-//     setIsModalOpen(true);
-//   };
-
-//   const handleOk = () => {
-//     setIsModalOpen(false);
-//   };
-
-//   const handleCancel = () => {
-//     setIsModalOpen(false);
-//   };
-  
-//   return (
-//     <>
-//       <Button type="primary" onClick={showModal}>
-//         Open Modal
-//       </Button>
-//       <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-//         <p>Some contents...</p>
-//         <p>Some contents...</p>
-//         <p>Some contents...</p>
-//       </Modal>
-//     </>
-//   );;
-// };
-
-// export default ModalUI;
+export default ModalUI;
