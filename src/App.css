@@ -61,3 +61,65 @@
 .modal_parag{
   padding: 20px;
 }
+
+.table-row {
+  transition: background-color 0.3s; /* Pour une transition fluide */
+}
+
+.table-row:nth-child(even) {
+  background-color: #f2f2f2; /* Couleur pour les lignes paires */
+}
+
+.table-row:nth-child(odd) {
+  background-color: #ffffff; /* Couleur pour les lignes impaires */
+}
+
+.table-row:hover {
+  background-color: #d1e7dd; /* Couleur de survol */
+}
+
+.table_head, .table_foot{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.entries, .search, .pagination{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination{
+  gap: .8rem;
+}
+
+.back{
+  margin: auto;
+  text-decoration: none;
+  border: 1px solid #dedede;
+  border-radius: 8px;
+  padding: .5rem 1rem;
+  color: #000;
+  background: #dedede;
+}
+
+.back:hover{
+  background: #4196fc;
+  color: #fff;
+}
+
+.next{
+  border: 1px solid #4196fc;
+  border-radius: 8px;
+  padding: .5rem 1rem;
+  color: #fff;
+  background: #4196fc;
+  cursor: pointer;
+}
+
+.next:hover{
+  background: #dedede;
+  color: #4196fc;
+}
+

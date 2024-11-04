@@ -91,6 +91,11 @@ const TableUI: React.FC<TableUIProps> = ({ data, onChange }) => {
         `${record.zipCode}-${record.firstName}-${record.lastName}`
       }
       showSorterTooltip={{ target: 'sorter-icon' }}
+      rowClassName={(record, index) => 
+        index % 2 === 0 ? 'table-row' : 'table-row' 
+      }
+      pagination={false}
+      // pagination={{ pageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '50', '100'] }} // Add pagination here
     />
   );
 };

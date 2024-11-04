@@ -10,6 +10,7 @@ interface Option {
 interface SelectUIProps {
   options: Option[];
   onChange?: (value: string) => void;
+  defaultValue?: string;
 }
 
 const SelectUI: React.FC<SelectUIProps> = ({ options, onChange }) => (
