@@ -6,9 +6,9 @@ import { useEffect, useState } from "react";
 import { setEmployees } from "../../redux/slices/EmployeeSlice";
 import LabelUI from "./../../components/Atoms/Label/LabelUI";
 import InputUI from "./../../components/Atoms/Input/InputUI";
-import { Select } from "antd";
 import SelectUI from "../../components/Atoms/Select/SelectUI";
 import dayjs from "dayjs";
+import { selectStates } from "../../redux/slices/StateSlice";
 
 const EmployeeList = () => {
   const [searchString, setSearchString] = useState("");
@@ -18,6 +18,7 @@ const EmployeeList = () => {
   const employees = useSelector(
     (state: RootState) => state.employees.employees
   );
+  const states = useSelector(selectStates); 
 
   useEffect(() => {
     // Load employees from localStorage when the component mounts
@@ -31,24 +32,43 @@ const EmployeeList = () => {
     }
   }, [dispatch, employees.length]);
 
-  const filteredEmployees = employees.filter((employee) =>
-    // Object.values(employee).some((value) =>
-      // value.toLowerCase().includes(searchString.toLowerCase())
-    // )
-    Object.entries(employee).some(([key, value]) => {
-      // Convert value to a string for uniform comparison
-      const stringValue = value.toString().toLowerCase().trim();
+  // Create a dictionary of states for quick lookups
+  const stateAbbreviationMap = states.reduce((map, state) => {
+    map[state.name] = state.abbreviation;
+    return map;
+  }, {} as Record<string, string>);
+
+  // const filteredEmployees = employees.filter((employee) =>
+
+  //   Object.entries(employee).some(([key, value]) => {
+  //     // Convert value to a string for uniform comparison
+  //     const stringValue = value.toString().toLowerCase().trim();
   
-      // Format dates to DD/MM/YYYY if the column is a date
+  //     // Format dates to DD/MM/YYYY if the column is a date
+  //     if (key === "startDate" || key === "dateOfBirth") {
+  //       const formattedDate = dayjs(value).format("DD/MM/YYYY");
+  //       return formattedDate.includes(searchString.toLowerCase().trim());
+  //     }
+  
+  //     // Check for a match in other fields (including `Zip Code` and any numeric fields)
+  //     return stringValue.includes(searchString.toLowerCase().trim());
+  //   })
+  // );
+  
+  const filteredEmployees = employees.map((employee) => ({
+    ...employee,
+    state: stateAbbreviationMap[employee.state] || employee.state, // Replace state name with abbreviation
+  })).filter((employee) =>
+    Object.entries(employee).some(([key, value]) => {
+      const stringValue = value.toString().toLowerCase().trim();
       if (key === "startDate" || key === "dateOfBirth") {
         const formattedDate = dayjs(value).format("DD/MM/YYYY");
         return formattedDate.includes(searchString.toLowerCase().trim());
       }
-  
-      // Check for a match in other fields (including `Zip Code` and any numeric fields)
       return stringValue.includes(searchString.toLowerCase().trim());
     })
   );
+
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchString(e.target.value);
@@ -108,9 +128,6 @@ const EmployeeList = () => {
           {/* <p>Showing {filteredEmployees.length} of {employees.length} entries</p> */}
           <p>Showing {startIndex + 1} to {Math.min(startIndex + entriesPerPage, totalEntries)} of {totalEntries} entries</p>
           <div className="pagination">
-            {/* <p>Previous</p>
-            <button>1</button>
-            <p>Next</p> */}
             <button
             className="next"
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
