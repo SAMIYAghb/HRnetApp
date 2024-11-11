@@ -1,7 +1,6 @@
-// import React, { useState } from "react";
+import React, { useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import { useFormik } from "formik";
-import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { selectDepartments } from "../../redux/slices/DepatementSlice";
@@ -12,7 +11,7 @@ import DatePickerField from "../Molecules/DatePickerField/DatePickerField";
 import InputField from "../Molecules/InputField/InputField";
 import SelectField from "../Molecules/SelectField/SelectField";
 import Modal from "modal-labrary";
-import 'modal-labrary/lib/Modal.css';
+import "modal-labrary/lib/Modal.css";
 
 const EmployeeForm: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,7 +19,6 @@ const EmployeeForm: React.FC = () => {
   const closeModal = () => setIsModalOpen(false);
 
   const dispatch = useDispatch();
-  // const [employeeData, setEmployeeData] = useState<any[]>([]);
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -60,9 +58,14 @@ const EmployeeForm: React.FC = () => {
       state: Yup.string().required("State is required"),
     }),
     onSubmit: (values) => {
-      console.log("Form data", values);
-      // setEmployeeData([...employeeData, values]);// Ajoute les valeurs soumises à l'état des employés
-      dispatch(addEmployee(values)); // Dispatch the addEmployee action
+      // Ensure zipCode is treated as a number
+      const updatedValues = {
+        ...values,
+        zipCode: values.zipCode.toString(), // Convert zipCode to string
+      };
+
+      console.log("Form data", updatedValues);
+      dispatch(addEmployee(updatedValues)); // Dispatch the addEmployee action
 
       // Load existing employees from localStorage, or start with an empty array
       const existingEmployees = JSON.parse(
@@ -70,11 +73,10 @@ const EmployeeForm: React.FC = () => {
       );
 
       // Add the new employee to the existing array
-      const updatedEmployees = [...existingEmployees, values];
-
+      const updatedEmployees = [...existingEmployees, updatedValues];
       // Save the updated employee array back to localStorage
       localStorage.setItem("employees", JSON.stringify(updatedEmployees));
-      
+
       //afficher la modale
       openModal();
       formik.resetForm(); // Réinitialise le formulaire après soumission
@@ -206,8 +208,12 @@ const EmployeeForm: React.FC = () => {
           <InputField
             label="Zip Code"
             name="zipCode"
+            type="number"
             value={formik.values.zipCode}
-            onChange={formik.handleChange}
+            // onChange={formik.handleChange}
+            onChange={(e) =>
+              formik.setFieldValue("zipCode", Number(e.target.value))
+            } // Convert to number
             onBlur={formik.handleBlur}
             error={
               formik.touched.zipCode && formik.errors.zipCode
@@ -228,11 +234,14 @@ const EmployeeForm: React.FC = () => {
       </form>
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={closeModal}>
-         <h2>Employee Added</h2>
-        <p className="custom-modal-content">Employee has been successfully added!</p>
-         <button className="close" onClick={closeModal}>Close</button>
-       </Modal>
-    
+          <h2>Employee Added</h2>
+          <p className="custom-modal-content">
+            Employee has been successfully added!
+          </p>
+          <button className="close" onClick={closeModal}>
+            Close
+          </button>
+        </Modal>
       )}
     </>
   );
