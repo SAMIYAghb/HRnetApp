@@ -69,7 +69,6 @@ const EmployeeList = () => {
     })
   );
 
-
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchString(e.target.value);
     setCurrentPage(1); // Reset to first page when search changes

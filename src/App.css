@@ -58,8 +58,8 @@
   padding: 10px;
 }
 
-.modal_parag{
-  padding: 20px;
+.custom-modal-content {
+  padding: 25px; /* Ajouter du padding autour du contenu */
 }
 
 .table-row {

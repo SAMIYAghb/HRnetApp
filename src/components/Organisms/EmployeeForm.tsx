@@ -11,7 +11,8 @@ import ButtonUI from "../Atoms/Button/Button";
 import DatePickerField from "../Molecules/DatePickerField/DatePickerField";
 import InputField from "../Molecules/InputField/InputField";
 import SelectField from "../Molecules/SelectField/SelectField";
-import ModalUI from "../Atoms/Modal/ModalUI";
+import Modal from "modal-labrary";
+import 'modal-labrary/lib/Modal.css';
 
 const EmployeeForm: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -226,12 +227,12 @@ const EmployeeForm: React.FC = () => {
         <ButtonUI text="Save" />
       </form>
       {isModalOpen && (
-        <ModalUI
-          title="Employee Added"
-          paragraph="Employee has been successfully added!"
-          onClose={closeModal}
-          open={isModalOpen}
-        />
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+         <h2>Employee Added</h2>
+        <p className="custom-modal-content">Employee has been successfully added!</p>
+         <button className="close" onClick={closeModal}>Close</button>
+       </Modal>
+    
       )}
     </>
   );
