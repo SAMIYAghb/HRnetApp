@@ -1,17 +1,6 @@
 import { Table } from "antd";
 import dayjs from "dayjs";
-import React from "react";
-interface DataType {
-  firstName: string;
-  lastName: string;
-  startDate: string;
-  department: string;
-  dateOfBirth: string;
-  street: string;
-  city: string;
-  state: string;
-  zipCode: string;
-}
+import { DataType } from '../../../../types'
 
 interface TableUIProps {
   data: DataType[];
@@ -76,8 +65,8 @@ const columns = [
   { 
     title: "Zip Code", 
     dataIndex: "zipCode", 
-    key: "zipCode",
-    sorter: (a: DataType, b: DataType) => a.zipCode.localeCompare(b.zipCode), 
+    key: "zipCode", 
+    sorter: (a: DataType, b: DataType) => a.zipCode - b.zipCode, 
   },
 ];
 

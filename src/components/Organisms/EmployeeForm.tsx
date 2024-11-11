@@ -58,14 +58,10 @@ const EmployeeForm: React.FC = () => {
       state: Yup.string().required("State is required"),
     }),
     onSubmit: (values) => {
-      // Ensure zipCode is treated as a number
-      const updatedValues = {
-        ...values,
-        zipCode: values.zipCode.toString(), // Convert zipCode to string
-      };
+  
 
-      console.log("Form data", updatedValues);
-      dispatch(addEmployee(updatedValues)); // Dispatch the addEmployee action
+      console.log("Form data", values);
+      dispatch(addEmployee(values)); // Dispatch the addEmployee action
 
       // Load existing employees from localStorage, or start with an empty array
       const existingEmployees = JSON.parse(
@@ -73,7 +69,7 @@ const EmployeeForm: React.FC = () => {
       );
 
       // Add the new employee to the existing array
-      const updatedEmployees = [...existingEmployees, updatedValues];
+      const updatedEmployees = [...existingEmployees, values];
       // Save the updated employee array back to localStorage
       localStorage.setItem("employees", JSON.stringify(updatedEmployees));
 

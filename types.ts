@@ -10,6 +10,14 @@ export interface EmployeeFormValues {
     state: string;
   }
   
-//   export interface State {
-//     name: string;
-//   }
+export interface DataType {
+    firstName: string;
+    lastName: string;
+    startDate: string;
+    department: string;
+    dateOfBirth: string;
+    street: string;
+    city: string;
+    state: string;
+    zipCode: number;
+  }
