@@ -8,7 +8,6 @@ Un système de gestion des employés permettant d'afficher, rechercher et filtre
 - [Technologies utilisées](#technologies-utilisées)
 - [Installation](#installation)
 - [Utilisation](#utilisation)
-- [Structure du projet](#structure-du-projet)
 - [Contribuer](#contribuer)
 - [Auteurs](#auteurs)
 
@@ -64,7 +63,7 @@ npm start
 5. L'application sera accessible à l'adresse http://localhost:5173.
 
 
- Utilisation
+## Utilisation
 L'application affiche un tableau des employés avec les informations suivantes :
 
 First Name : Prénom de l'employé.
@@ -85,7 +84,7 @@ Filtrage
 Vous pouvez filtrer les employés par département en utilisant le menu déroulant
 
 
-Contribuer
+## Contribuer
 Si vous souhaitez contribuer à ce projet, voici quelques étapes simples :
 
 Forkez ce projet.
@@ -93,6 +92,6 @@ Créez une branche pour votre fonctionnalité ou correction de bug (git checkout
 Commitez vos modifications (git commit -am 'Ajout de ma fonctionnalité').
 Poussez sur la branche (git push origin feature/ma-fonctionnalité).
 Ouvrez une pull request.
-Auteurs
-Votre Nom - Développeur principal - @votreprofil
+## auteurs
+Samiya Brd - Développeur principal - 
 
