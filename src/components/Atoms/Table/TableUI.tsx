@@ -4,7 +4,7 @@ import { DataType } from '../../../../types'
 
 interface TableUIProps {
   data: DataType[];
-  onChange?: (pagination: any, filters: any, sorter: any) => void;
+  // onChange?: (pagination: any, filters: any, sorter: any) => void;
 }
 
 // const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {
@@ -70,12 +70,12 @@ const columns = [
   },
 ];
 
-const TableUI: React.FC<TableUIProps> = ({ data, onChange }) => {
+const TableUI: React.FC<TableUIProps> = ({ data }) => {
   return (
     <Table
       columns={columns}
       dataSource={data}
-      onChange={onChange}
+      // onChange={onChange}
       rowKey={(record) =>
         `${record.zipCode}-${record.firstName}-${record.lastName}`
       }

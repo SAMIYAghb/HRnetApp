@@ -57,10 +57,12 @@ const EmployeeList = () => {
   
   const filteredEmployees = employees.map((employee) => ({
     ...employee,
+    zipCode: Number(employee.zipCode), 
     state: stateAbbreviationMap[employee.state] || employee.state, // Replace state name with abbreviation
   })).filter((employee) =>
     Object.entries(employee).some(([key, value]) => {
-      const stringValue = value.toString().toLowerCase().trim();
+      // const stringValue = value.toString().toLowerCase().trim();
+      const stringValue = typeof value === 'number' ? value.toString() : value.toLowerCase().trim();
       if (key === "startDate" || key === "dateOfBirth") {
         const formattedDate = dayjs(value).format("DD/MM/YYYY");
         return formattedDate.includes(searchString.toLowerCase().trim());
@@ -74,7 +76,7 @@ const EmployeeList = () => {
     setCurrentPage(1); // Reset to first page when search changes
   };
 
-  const handleEntriesChange = (value) => {
+  const handleEntriesChange = (value: string | number) => {
     setEntriesPerPage(Number(value));
     setCurrentPage(1); // Reset to first page when changing entries per page
   };
