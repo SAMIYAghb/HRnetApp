@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,18 +16,18 @@ import "modal-labrary/lib/Modal.css";
 /**
  * EmployeeForm component is a form for adding new employees to the application.
  * It handles form input, validation, and submission.
- * 
+ *
  * @component
  * @returns {React.FC} A form for adding new employees.
- * 
+ *
  * @example
  * return <EmployeeForm />
  */
 
 const EmployeeForm: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const openModal = useCallback(() => setIsModalOpen(true), []);
+  const closeModal = useCallback(() => setIsModalOpen(false), []);
 
   const dispatch = useDispatch();
 
@@ -51,18 +51,23 @@ const EmployeeForm: React.FC = () => {
       lastName: Yup.string()
         .required("Last Name is required")
         .max(100, "Last Name cannot exceed 100 characters"),
-      dateOfBirth: Yup.date().nullable().required("Date of birth is required")
-      .test("age", "You must be at least 18 years old", (value) => {
-        if (!value) return false; // Si la date de naissance n'est pas fournie, cela renvoie faux
-        const today = new Date();
-        const birthDate = new Date(value);
-        const age = today.getFullYear() - birthDate.getFullYear();
-        const monthDifference = today.getMonth() - birthDate.getMonth();
-        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
-          return age >= 18; // Si la date d'anniversaire n'est pas encore passée cette année, l'âge doit être supérieur ou égal à 18
-        }
-        return age >= 18; // Sinon, vérifie simplement l'âge
-      }),
+      dateOfBirth: Yup.date()
+        .nullable()
+        .required("Date of birth is required")
+        .test("age", "You must be at least 18 years old", (value) => {
+          if (!value) return false; // Si la date de naissance n'est pas fournie, cela renvoie faux
+          const today = new Date();
+          const birthDate = new Date(value);
+          const age = today.getFullYear() - birthDate.getFullYear();
+          const monthDifference = today.getMonth() - birthDate.getMonth();
+          if (
+            monthDifference < 0 ||
+            (monthDifference === 0 && today.getDate() < birthDate.getDate())
+          ) {
+            return age >= 18; // Si la date d'anniversaire n'est pas encore passée cette année, l'âge doit être supérieur ou égal à 18
+          }
+          return age >= 18; // Sinon, vérifie simplement l'âge
+        }),
       startDate: Yup.date().nullable().required("Start date is required"),
       street: Yup.string().required("Street is required"),
       city: Yup.string().required("City is required"),
@@ -70,6 +75,8 @@ const EmployeeForm: React.FC = () => {
       department: Yup.string().required("Department is required"),
       state: Yup.string().required("State is required"),
     }),
+    validateOnBlur: true, // La validation se fait lorsque l'utilisateur quitte un champ
+  validateOnChange: false, // Désactive la validation lors du changementF
     onSubmit: (values) => {
       // console.log("Form data", values);
       dispatch(addEmployee(values)); // Dispatch the addEmployee action
@@ -91,24 +98,27 @@ const EmployeeForm: React.FC = () => {
   });
 
   const departments = useSelector(selectDepartments);
-  const departmentOptions = departments.map((dep) => ({
-    label: dep,
-    value: dep,
-  }));
+  const departmentOptions = useMemo(
+    () =>
+      departments.map((dep) => ({
+        label: dep,
+        value: dep,
+      })),
+    [departments]
+  );
 
   const states = useSelector(selectStates);
   // Extraire les noms des États
-  const stateOptions = states.map((state) => ({
-    label: state.name,
-    value: state.name,
-  }));
+  const stateOptions = useMemo(
+    () =>
+      states.map((state) => ({
+        label: state.name,
+        value: state.name,
+      })),
+    [states]
+  );
 
-  if (
-    !departments ||
-    departments.length === 0 ||
-    !states ||
-    states.length === 0
-  ) {
+  if (!departments || !states) {
     return <div>Loading...</div>;
   }
 

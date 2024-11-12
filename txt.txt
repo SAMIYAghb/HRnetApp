@@ -6,3 +6,12 @@ npm run build
 Pour visualiser le résultat en local, utilisez :
 npx vite preview
 Cette commande lance un serveur de prévisualisation de votre build pour vérifier que tout fonctionne comme prévu.
+
+
+
+
+vite v5.4.10 building for production...
+✓ 3150 modules transformed.
+dist/index.html                     0.45 kB │ gzip:   0.29 kB
+dist/assets/index-CBJdYIoo.css      2.10 kB │ gzip:   0.78 kB
+dist/assets/index-CyAAaPmQ.js   1,096.33 kB │ gzip: 349.66 kB

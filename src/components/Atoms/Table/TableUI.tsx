@@ -68,12 +68,11 @@ const TableUI: React.FC<TableUIProps> = ({ data }) => {
     <Table
       columns={columns}
       dataSource={data}
-      // onChange={onChange}
       rowKey={(record) =>
         `${record.zipCode}-${record.firstName}-${record.lastName}`
       }
       showSorterTooltip={{ target: 'sorter-icon' }}
-      rowClassName={(record, index) => 
+      rowClassName={(_, index) => 
         index % 2 === 0 ? 'table-row' : 'table-row' 
       }
       pagination={false}

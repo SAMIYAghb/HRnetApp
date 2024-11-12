@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import TableUI from "../../components/Atoms/Table/TableUI";
@@ -9,6 +9,7 @@ import { setEmployees } from "../../redux/slices/EmployeeSlice";
 import { selectStates } from "../../redux/slices/StateSlice";
 import { RootState } from "../../redux/store";
 import { Option } from "../../../types";
+import { useMemo } from "react";
 
 const EmployeeList = () => {
   const [searchString, setSearchString] = useState("");
@@ -20,6 +21,8 @@ const EmployeeList = () => {
   );
   const states = useSelector(selectStates);
 
+  const MemoizedTableUI = React.memo(TableUI);
+  const MemoizedPaginationControls = React.memo(PaginationControls);
   useEffect(() => {
     /**
      * Load employees from localStorage when the component mounts.
@@ -35,69 +38,71 @@ const EmployeeList = () => {
     }
   }, [dispatch, employees.length]);
 
-   /**
-   * Create a dictionary of state abbreviations for quick lookup by state name.
-   * @type {Record<string, string>}
-   */
-  const stateAbbreviationMap = states.reduce((map, state) => {
-    map[state.name] = state.abbreviation;
-    return map;
-  }, {} as Record<string, string>);
-
+  // Utiliser useMemo pour calculer les employés filtrés une seule fois
+  const stateAbbreviationMap = useMemo(
+    () =>
+      states.reduce((map, state) => {
+        map[state.name] = state.abbreviation;
+        return map;
+      }, {} as Record<string, string>), // Explicitly define the type as Record<string, string>
+    [states]
+  );
   /**
    * Filter and map employees to include only relevant fields and filter by search criteria.
    * Dates are formatted for easier search by date.
    * @type {Array<Object>}
    */
-  const filteredEmployees = employees
-    .map((employee) => ({
-      ...employee,
-      zipCode: Number(employee.zipCode),
-      state: stateAbbreviationMap[employee.state] || employee.state, // Replace state name with abbreviation
-    }))
-    .filter((employee) =>
-      Object.entries(employee).some(([key, value]) => {
-        const stringValue =
-          typeof value === "number"
-            ? value.toString()
-            : value.toLowerCase().trim();
-        if (key === "startDate" || key === "dateOfBirth") {
-          const formattedDate = dayjs(value).format("DD/MM/YYYY");
-          return formattedDate.includes(searchString.toLowerCase().trim());
-        }
-        return stringValue.includes(searchString.toLowerCase().trim());
-      })
-    );
-
+  const filteredEmployees = useMemo(() => {
+    return employees
+      .map((employee) => ({
+        ...employee,
+        zipCode: Number(employee.zipCode),
+        state: stateAbbreviationMap[employee.state] || employee.state, // Replace state name with abbreviation
+      }))
+      .filter((employee) =>
+        Object.entries(employee).some(([key, value]) => {
+          const stringValue =
+            typeof value === "number"
+              ? value.toString()
+              : value.toLowerCase().trim();
+          if (key === "startDate" || key === "dateOfBirth") {
+            const formattedDate = dayjs(value).format("DD/MM/YYYY");
+            return formattedDate.includes(searchString.toLowerCase().trim());
+          }
+          return stringValue.includes(searchString.toLowerCase().trim());
+        })
+      );
+  }, [employees, searchString, stateAbbreviationMap]);
   /**
    * Update the search term and reset pagination to the first page.
    * @param {React.ChangeEvent<HTMLInputElement>} e - The input change event
    */
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchString(e.target.value);
-    setCurrentPage(1); // Reset to first page when search changes
-  };
+  const handleSearchChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchString(e.target.value);
+      setCurrentPage(1); // Reset to first page when search changes
+    },
+    []
+  );
 
-   /**
+  /**
    * Update the number of entries per page and reset pagination to the first page.
    * @param {string | number} value - The new entries per page value
    */
-  const handleEntriesChange = (value: string | number) => {
+  const handleEntriesChange = useCallback((value: string | number) => {
     setEntriesPerPage(Number(value));
     setCurrentPage(1); // Reset to first page when changing entries per page
-  };
+  }, []);
 
   /** Total number of entries after filtering */
   const totalEntries = filteredEmployees.length;
-   /** Start index for pagination */
+  /** Start index for pagination */
   const startIndex = (currentPage - 1) * entriesPerPage;
   /** Paginated list of employees for the current page */
-  const paginatedEmployees = filteredEmployees.slice(
-    startIndex,
-    startIndex + entriesPerPage
-  );
+  const endIndex = startIndex + entriesPerPage;
+  const paginatedEmployees = filteredEmployees.slice(startIndex, endIndex);
 
-   /**
+  /**
    * Options for the number of entries per page.
    * @type {Option[]}
    */
@@ -120,9 +125,10 @@ const EmployeeList = () => {
           onEntriesChange={handleEntriesChange}
           options={options}
         />
-        <TableUI data={paginatedEmployees} />
+        {/* <TableUI data={paginatedEmployees} /> */}
+        <MemoizedTableUI data={paginatedEmployees} />
 
-        <PaginationControls
+        <MemoizedPaginationControls
           currentPage={currentPage}
           totalEntries={totalEntries}
           entriesPerPage={entriesPerPage}
