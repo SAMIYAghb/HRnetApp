@@ -1,0 +1,8 @@
+Commandes de build
+Avec Vite
+npm run build
+
+
+Pour visualiser le résultat en local, utilisez :
+npx vite preview
+Cette commande lance un serveur de prévisualisation de votre build pour vérifier que tout fonctionne comme prévu.
