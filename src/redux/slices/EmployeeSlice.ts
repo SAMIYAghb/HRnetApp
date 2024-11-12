@@ -1,41 +1,56 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Employee } from '../../../types';
 
-// Define the Employee type if you're using TypeScript
-interface Employee {
-  firstName: string;
-  lastName: string;
-  dateOfBirth: string;
-  startDate: string;
-  street: string;
-  city: string;
-  zipCode: string;
-  department: string;
-  state: string;
-}
 
-// Define the initial state
+/**
+ * EmployeeState type defines the structure of the employee slice state.
+ * @typedef {Object} EmployeeState
+ * @property {Employee[]} employees - Array of employees.
+ */
 interface EmployeeState {
   employees: Employee[];
 }
 
+/**
+ * Initial state for the employee slice.
+ * @type {EmployeeState}
+ */
 const initialState: EmployeeState = {
   employees: [],
 };
 
+
+/**
+ * Redux slice for employee data management.
+ * Provides actions to add a single employee or set multiple employees.
+ */
 const employeeSlice = createSlice({
   name: 'employees',
   initialState,
   reducers: {
+    /**
+     * Adds a new employee to the employees array.
+     * @param {EmployeeState} state - The current employee state.
+     * @param {PayloadAction<Employee>} action - The action containing the employee to add.
+     */
     addEmployee: (state, action: PayloadAction<Employee>) => {
       state.employees.push(action.payload);
     },
+
+    /**
+     * Sets the employees array with the provided list of employees.
+     * @param {EmployeeState} state - The current employee state.
+     * @param {PayloadAction<Employee[]>} action - The action containing the list of employees to set.
+     */
     setEmployees: (state, action: PayloadAction<Employee[]>) => {
       state.employees = action.payload;
     },
   },
 });
+// Export the actions to be used in components.
 
 export const { addEmployee, setEmployees } = employeeSlice.actions;
+// Export the reducer to be included in the Redux store.
 export default employeeSlice.reducer;
 
 

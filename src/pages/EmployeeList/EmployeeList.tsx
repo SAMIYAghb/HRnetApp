@@ -21,7 +21,10 @@ const EmployeeList = () => {
   const states = useSelector(selectStates);
 
   useEffect(() => {
-    // Load employees from localStorage when the component mounts
+    /**
+     * Load employees from localStorage when the component mounts.
+     * If employees are not already in Redux state, populate them from localStorage.
+     */
     const storedEmployees = JSON.parse(
       localStorage.getItem("employees") || "[]"
     );
@@ -32,12 +35,20 @@ const EmployeeList = () => {
     }
   }, [dispatch, employees.length]);
 
-  // Create a dictionary of states for quick lookups
+   /**
+   * Create a dictionary of state abbreviations for quick lookup by state name.
+   * @type {Record<string, string>}
+   */
   const stateAbbreviationMap = states.reduce((map, state) => {
     map[state.name] = state.abbreviation;
     return map;
   }, {} as Record<string, string>);
 
+  /**
+   * Filter and map employees to include only relevant fields and filter by search criteria.
+   * Dates are formatted for easier search by date.
+   * @type {Array<Object>}
+   */
   const filteredEmployees = employees
     .map((employee) => ({
       ...employee,
@@ -58,24 +69,38 @@ const EmployeeList = () => {
       })
     );
 
+  /**
+   * Update the search term and reset pagination to the first page.
+   * @param {React.ChangeEvent<HTMLInputElement>} e - The input change event
+   */
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchString(e.target.value);
     setCurrentPage(1); // Reset to first page when search changes
   };
 
+   /**
+   * Update the number of entries per page and reset pagination to the first page.
+   * @param {string | number} value - The new entries per page value
+   */
   const handleEntriesChange = (value: string | number) => {
     setEntriesPerPage(Number(value));
     setCurrentPage(1); // Reset to first page when changing entries per page
   };
 
+  /** Total number of entries after filtering */
   const totalEntries = filteredEmployees.length;
+   /** Start index for pagination */
   const startIndex = (currentPage - 1) * entriesPerPage;
+  /** Paginated list of employees for the current page */
   const paginatedEmployees = filteredEmployees.slice(
     startIndex,
     startIndex + entriesPerPage
   );
 
-
+   /**
+   * Options for the number of entries per page.
+   * @type {Option[]}
+   */
   const options: Option[] = [
     { label: "10", value: "10" },
     { label: "25", value: "25" },

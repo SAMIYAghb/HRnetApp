@@ -13,12 +13,25 @@ import SelectField from "../Molecules/SelectField/SelectField";
 import Modal from "modal-labrary";
 import "modal-labrary/lib/Modal.css";
 
+/**
+ * EmployeeForm component is a form for adding new employees to the application.
+ * It handles form input, validation, and submission.
+ * 
+ * @component
+ * @returns {React.FC} A form for adding new employees.
+ * 
+ * @example
+ * return <EmployeeForm />
+ */
+
 const EmployeeForm: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
   const dispatch = useDispatch();
+
+  /** Formik form configuration */
   const formik = useFormik({
     initialValues: {
       firstName: "",
