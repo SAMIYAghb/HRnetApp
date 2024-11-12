@@ -3,7 +3,7 @@ import React from "react";
 import { SelectUIProps } from "../../../../types";
 
 
-const SelectUI: React.FC<SelectUIProps> = ({ options, onChange }) => (
+const SelectUI: React.FC<SelectUIProps> = React.memo(({ options, onChange }) => (
     <Select
       defaultValue ={options[0]?.value}
       onChange={onChange}
@@ -11,7 +11,7 @@ const SelectUI: React.FC<SelectUIProps> = ({ options, onChange }) => (
       style={{ width: "100%" }}
     />
 
-  );
+  ));
 
 
 export default SelectUI;

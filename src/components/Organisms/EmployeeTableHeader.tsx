@@ -4,7 +4,7 @@ import EntriesSelector from "../Molecules/EntriesSelector/EntriesSelector";
 import { EmployeeTableHeaderProps } from "../../../types";
 
 
-const EmployeeTableHeader: React.FC<EmployeeTableHeaderProps> = ({
+const EmployeeTableHeader: React.FC<EmployeeTableHeaderProps> = React.memo(({
   searchString,
   onSearchChange,
   onEntriesChange,
@@ -14,6 +14,6 @@ const EmployeeTableHeader: React.FC<EmployeeTableHeaderProps> = ({
     <EntriesSelector options={options} onEntriesChange={onEntriesChange} />
     <SearchField searchString={searchString} onSearchChange={onSearchChange} />
   </div>
-);
+));
 
 export default EmployeeTableHeader;
