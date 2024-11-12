@@ -38,22 +38,6 @@ const EmployeeList = () => {
     return map;
   }, {} as Record<string, string>);
 
-  // const filteredEmployees = employees.filter((employee) =>
-
-  //   Object.entries(employee).some(([key, value]) => {
-  //     // Convert value to a string for uniform comparison
-  //     const stringValue = value.toString().toLowerCase().trim();
-  
-  //     // Format dates to DD/MM/YYYY if the column is a date
-  //     if (key === "startDate" || key === "dateOfBirth") {
-  //       const formattedDate = dayjs(value).format("DD/MM/YYYY");
-  //       return formattedDate.includes(searchString.toLowerCase().trim());
-  //     }
-  
-  //     // Check for a match in other fields (including `Zip Code` and any numeric fields)
-  //     return stringValue.includes(searchString.toLowerCase().trim());
-  //   })
-  // );
   
   const filteredEmployees = employees.map((employee) => ({
     ...employee,
@@ -61,7 +45,6 @@ const EmployeeList = () => {
     state: stateAbbreviationMap[employee.state] || employee.state, // Replace state name with abbreviation
   })).filter((employee) =>
     Object.entries(employee).some(([key, value]) => {
-      // const stringValue = value.toString().toLowerCase().trim();
       const stringValue = typeof value === 'number' ? value.toString() : value.toLowerCase().trim();
       if (key === "startDate" || key === "dateOfBirth") {
         const formattedDate = dayjs(value).format("DD/MM/YYYY");
@@ -123,10 +106,8 @@ const EmployeeList = () => {
             />
           </div>
         </div>
-        {/* <TableUI data={filteredEmployees} /> */}
         <TableUI data={paginatedEmployees} />
         <div className="table_foot">
-          {/* <p>Showing {filteredEmployees.length} of {employees.length} entries</p> */}
           <p>Showing {startIndex + 1} to {Math.min(startIndex + entriesPerPage, totalEntries)} of {totalEntries} entries</p>
           <div className="pagination">
             <button

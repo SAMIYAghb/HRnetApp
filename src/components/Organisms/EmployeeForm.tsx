@@ -38,18 +38,18 @@ const EmployeeForm: React.FC = () => {
       lastName: Yup.string()
         .required("Last Name is required")
         .max(100, "Last Name cannot exceed 100 characters"),
-      dateOfBirth: Yup.date().nullable().required("Date of birth is required"),
-      // .test("age", "You must be at least 18 years old", (value) => {
-      //   if (!value) return false; // Si la date de naissance n'est pas fournie, cela renvoie faux
-      //   const today = new Date();
-      //   const birthDate = new Date(value);
-      //   const age = today.getFullYear() - birthDate.getFullYear();
-      //   const monthDifference = today.getMonth() - birthDate.getMonth();
-      //   if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
-      //     return age >= 18; // Si la date d'anniversaire n'est pas encore passée cette année, l'âge doit être supérieur ou égal à 18
-      //   }
-      //   return age >= 18; // Sinon, vérifie simplement l'âge
-      // })
+      dateOfBirth: Yup.date().nullable().required("Date of birth is required")
+      .test("age", "You must be at least 18 years old", (value) => {
+        if (!value) return false; // Si la date de naissance n'est pas fournie, cela renvoie faux
+        const today = new Date();
+        const birthDate = new Date(value);
+        const age = today.getFullYear() - birthDate.getFullYear();
+        const monthDifference = today.getMonth() - birthDate.getMonth();
+        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+          return age >= 18; // Si la date d'anniversaire n'est pas encore passée cette année, l'âge doit être supérieur ou égal à 18
+        }
+        return age >= 18; // Sinon, vérifie simplement l'âge
+      }),
       startDate: Yup.date().nullable().required("Start date is required"),
       street: Yup.string().required("Street is required"),
       city: Yup.string().required("City is required"),

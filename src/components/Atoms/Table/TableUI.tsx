@@ -4,12 +4,8 @@ import { DataType } from '../../../../types'
 
 interface TableUIProps {
   data: DataType[];
-  // onChange?: (pagination: any, filters: any, sorter: any) => void;
 }
 
-// const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {
-//   console.log('params', pagination, filters, sorter, extra);
-// };
 
 const columns = [
   {
@@ -84,7 +80,6 @@ const TableUI: React.FC<TableUIProps> = ({ data }) => {
         index % 2 === 0 ? 'table-row' : 'table-row' 
       }
       pagination={false}
-      // pagination={{ pageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '50', '100'] }} // Add pagination here
     />
   );
 };
