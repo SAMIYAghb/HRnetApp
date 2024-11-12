@@ -1,17 +1,8 @@
 import React from 'react';
-import LabelUI from '../../Atoms/Label/LabelUI';
+import { DatePickerFieldProps } from '../../../../types';
 import DatePickerUI from '../../Atoms/DatePicker/DatePickerUI';
-import { Dayjs } from 'dayjs';
+import LabelUI from '../../Atoms/Label/LabelUI';
 
-
-
-interface DatePickerFieldProps {
-  label: string;
-  name: string;
-  value?: Dayjs | null; // Utilisez Dayjs
-  onChange: (date: Dayjs | null, dateString: string | string[]) => void; // Le premier paramètre doit être Dayjs
-  error?: string;
-}
 
 const DatePickerField: React.FC<DatePickerFieldProps> = ({ label, name, value, onChange, error }) => {
   return (

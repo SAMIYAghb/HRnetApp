@@ -1,17 +1,7 @@
 import { Select } from "antd";
 import React from "react";
+import { SelectUIProps } from "../../../../types";
 
-interface Option {
-  label: string;
-  value: string;
-}
-
-
-interface SelectUIProps {
-  options: Option[];
-  onChange?: (value: string) => void;
-  defaultValue?: string;
-}
 
 const SelectUI: React.FC<SelectUIProps> = ({ options, onChange }) => (
     <Select

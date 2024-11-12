@@ -1,9 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import department from "../../data/department.ts";
+import { DepartmentState } from "../../../types.ts";
 
-interface DepartmentState {
-  departments: string[];
-}
 
 const initialState: DepartmentState = {
   departments: department,

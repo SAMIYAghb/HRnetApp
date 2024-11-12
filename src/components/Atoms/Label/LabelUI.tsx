@@ -1,9 +1,6 @@
 import React from "react";
+import { LabelUIProps } from "../../../../types";
 
-interface LabelUIProps {
-  text: string;
-  htmlFor?: string;
-}
 
 const LabelUI: React.FC<LabelUIProps> = ({ text, htmlFor }) => (
   <label

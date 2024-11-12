@@ -1,14 +1,6 @@
 import { Input, InputNumber } from "antd";
-import { Rule } from "antd/lib/form";
+import { InputUIProps } from "../../../../types";
 
-interface InputUIProps {
-  name: string;
-  rules?: Rule[];
-  type?: "text" | "number";
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  value: string | number;
-}
 
 const InputUI: React.FC<InputUIProps> = ({name, type = "text", onChange, onBlur, value }) => {
   return  type === "number" ? (

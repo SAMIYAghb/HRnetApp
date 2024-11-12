@@ -1,16 +1,8 @@
 import React from "react";
 import LabelUI from "../../Atoms/Label/LabelUI";
 import InputUI from "../../Atoms/Input/InputUI";
+import { InputFieldProps } from "../../../../types";
 
-interface InputFieldProps {
-  label: string;
-  name: string;
-  type?: "text" | "number";
-  value: string | number;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  error?: string;
-}
 
 const InputField: React.FC<InputFieldProps> = ({ label, name, type, value, onChange, onBlur,error }) => (
   <div className="input_item">

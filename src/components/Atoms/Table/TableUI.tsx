@@ -1,10 +1,7 @@
 import { Table } from "antd";
 import dayjs from "dayjs";
-import { DataType } from '../../../../types'
+import { DataType, TableUIProps } from '../../../../types'
 
-interface TableUIProps {
-  data: DataType[];
-}
 
 
 const columns = [

@@ -1,11 +1,8 @@
 import { DatePicker } from 'antd';
-import { Dayjs } from 'dayjs'; // Assurez-vous d'importer dayjs
 import React from 'react';
+import { DatePickerUIProps } from '../../../../types';
 
-interface DatePickerUIProps {
-  value?: Dayjs | null; // Utilisez Dayjs au lieu de string
-  onChange: (date: Dayjs | null, dateString: string | string[]) => void; // Accepter à la fois string et string[]
-}
+
 
 const DatePickerUI: React.FC<DatePickerUIProps> = ({ value, onChange }) => (
   <DatePicker

@@ -1,12 +1,8 @@
 import React from "react";
 import LabelUI from "../../Atoms/Label/LabelUI";
 import SelectUI from "../../Atoms/Select/SelectUI";
+import { EntriesSelectorProps } from "../../../../types";
 
-
-interface EntriesSelectorProps {
-  options: { label: string; value: string }[];
-  onEntriesChange: (value: string | number) => void;
-}
 
 const EntriesSelector: React.FC<EntriesSelectorProps> = ({ options, onEntriesChange }) => (
   <div className="entries">

@@ -1,15 +1,8 @@
 import React from "react";
 import PaginationInfo from "../Atoms/Pagination/PaginationInfo";
 import ButtonUI from "../Atoms/Button/Button";
+import { PaginationControlsProps } from "../../../types";
 
-
-interface PaginationControlsProps {
-  currentPage: number;
-  totalEntries: number;
-  entriesPerPage: number;
-  onPrevious: () => void;
-  onNext: () => void;
-}
 
 const PaginationControls: React.FC<PaginationControlsProps> = ({
   currentPage,

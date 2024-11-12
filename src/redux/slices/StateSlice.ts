@@ -1,12 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import state from "../../data/state.ts";
+import { State } from "../../../types.ts";
 
-
-// Interface pour représenter un État
-interface State {
-    name: string;
-    abbreviation: string;
-}
 
   // État du slice
 interface StatesState {

@@ -1,12 +1,6 @@
 import { Button } from "antd";
 import '../../../App.css'
-
-interface ButtonUIProps {
-  text: string;
-  onClick?: () => void;
-  disabled?: boolean;
-  className?: string;
-}
+import { ButtonUIProps } from "../../../../types";
 
 const ButtonUI: React.FC<ButtonUIProps> = ({text, onClick, disabled, className  }) =>{
   return(

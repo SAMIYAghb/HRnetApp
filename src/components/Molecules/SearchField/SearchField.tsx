@@ -1,12 +1,8 @@
 import React from "react";
 import LabelUI from "../../Atoms/Label/LabelUI";
 import InputUI from "../../Atoms/Input/InputUI";
+import { SearchFieldProps } from "../../../../types";
 
-
-interface SearchFieldProps {
-  searchString: string;
-  onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
 
 const SearchField: React.FC<SearchFieldProps> = ({ searchString, onSearchChange }) => (
   <div className="search">

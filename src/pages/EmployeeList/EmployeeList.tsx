@@ -8,6 +8,7 @@ import PaginationControls from "../../components/Organisms/PaginationControls";
 import { setEmployees } from "../../redux/slices/EmployeeSlice";
 import { selectStates } from "../../redux/slices/StateSlice";
 import { RootState } from "../../redux/store";
+import { Option } from "../../../types";
 
 const EmployeeList = () => {
   const [searchString, setSearchString] = useState("");
@@ -74,10 +75,6 @@ const EmployeeList = () => {
     startIndex + entriesPerPage
   );
 
-  interface Option {
-    label: string;
-    value: string;
-  }
 
   const options: Option[] = [
     { label: "10", value: "10" },

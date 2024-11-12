@@ -58,9 +58,7 @@ const EmployeeForm: React.FC = () => {
       state: Yup.string().required("State is required"),
     }),
     onSubmit: (values) => {
-  
-
-      console.log("Form data", values);
+      // console.log("Form data", values);
       dispatch(addEmployee(values)); // Dispatch the addEmployee action
 
       // Load existing employees from localStorage, or start with an empty array
