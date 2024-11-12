@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import department from "../../data/department.ts";
 import { DepartmentState } from "../../../types.ts";
 
-
 /**
  * The initial state of the department slice.
  * Contains an array of department names.

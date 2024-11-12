@@ -47,11 +47,7 @@ const EmployeeList = () => {
       }, {} as Record<string, string>), // Explicitly define the type as Record<string, string>
     [states]
   );
-  /**
-   * Filter and map employees to include only relevant fields and filter by search criteria.
-   * Dates are formatted for easier search by date.
-   * @type {Array<Object>}
-   */
+ 
   const filteredEmployees = useMemo(() => {
     return employees
       .map((employee) => ({

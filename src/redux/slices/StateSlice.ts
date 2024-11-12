@@ -2,12 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import state from "../../data/state.ts";
 import { State } from "../../../types.ts";
 
-
-/**
- * StatesState defines the structure of the slice state for US states.
- * @typedef {Object} StatesState
- * @property {State[]} states - Array of state objects.
- */
 interface StatesState {
     states: State[]; // Un tableau d'objets de type State
 }

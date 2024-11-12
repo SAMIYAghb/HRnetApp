@@ -1,12 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Employee } from '../../../types';
 
-
-/**
- * EmployeeState type defines the structure of the employee slice state.
- * @typedef {Object} EmployeeState
- * @property {Employee[]} employees - Array of employees.
- */
 interface EmployeeState {
   employees: Employee[];
 }
@@ -19,7 +13,6 @@ const initialState: EmployeeState = {
   employees: [],
 };
 
-
 /**
  * Redux slice for employee data management.
  * Provides actions to add a single employee or set multiple employees.
@@ -28,20 +21,11 @@ const employeeSlice = createSlice({
   name: 'employees',
   initialState,
   reducers: {
-    /**
-     * Adds a new employee to the employees array.
-     * @param {EmployeeState} state - The current employee state.
-     * @param {PayloadAction<Employee>} action - The action containing the employee to add.
-     */
+
     addEmployee: (state, action: PayloadAction<Employee>) => {
       state.employees.push(action.payload);
     },
 
-    /**
-     * Sets the employees array with the provided list of employees.
-     * @param {EmployeeState} state - The current employee state.
-     * @param {PayloadAction<Employee[]>} action - The action containing the list of employees to set.
-     */
     setEmployees: (state, action: PayloadAction<Employee[]>) => {
       state.employees = action.payload;
     },
