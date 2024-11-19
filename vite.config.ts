@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [
     react()
   ],
-  base: './',
+  base: '/HRnetApp/',
   build: {
     outDir: 'dist',
   },
