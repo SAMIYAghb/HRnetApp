@@ -116,7 +116,7 @@
 }
 
 .back:hover{
-  background: var(--bg-color);
+  background: var(--highlight-color);
   color: #fff;
 }
 
@@ -130,7 +130,7 @@
 }
 
 .next:hover{
-  background: var(--border-color);
+  background: var(--highlight-color);
   color: var(--bg-color);
 }
 
