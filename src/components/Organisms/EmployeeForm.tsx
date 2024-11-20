@@ -71,7 +71,14 @@ const EmployeeForm: React.FC = () => {
       startDate: Yup.date().nullable().required("Start date is required"),
       street: Yup.string().required("Street is required"),
       city: Yup.string().required("City is required"),
-      zipCode: Yup.number().required("Zip Code is required"),
+      zipCode: Yup.number()
+      .required("Zip Code is required")
+      .typeError("Zip Code must be a number")
+      .integer("Zip Code must be an integer")
+      .positive("Zip Code must be a positive number")
+      .test("length", "Zip Code must be 5 digits", (value) =>
+        value ? value.toString().length === 5 : false
+      ),
       department: Yup.string().required("Department is required"),
       state: Yup.string().required("State is required"),
     }),
