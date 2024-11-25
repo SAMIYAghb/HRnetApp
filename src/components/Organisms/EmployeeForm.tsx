@@ -231,6 +231,11 @@ const EmployeeForm: React.FC = () => {
             value={formik.values.state}
             options={stateOptions}
             onChange={(value) => formik.setFieldValue("state", value)}
+            error={
+              formik.touched.state && formik.errors.state
+                ? formik.errors.state
+                : ""
+            }
           />
 
           <InputField
@@ -256,6 +261,11 @@ const EmployeeForm: React.FC = () => {
           value={formik.values.department}
           options={departmentOptions}
           onChange={(value) => formik.setFieldValue("department", value)}
+          error={
+            formik.touched.department && formik.errors.department
+              ? formik.errors.department
+              : ""
+          }
         />
 
         <ButtonUI text="Save" />

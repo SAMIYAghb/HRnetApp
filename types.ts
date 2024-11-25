@@ -79,6 +79,7 @@ export interface InputFieldProps extends InputUIProps {
 export interface SelectFieldProps extends SelectUIProps {
   label: string;
   value: string;
+  error: string;
 }
 
 // Table & Pagination Props
