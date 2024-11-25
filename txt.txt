@@ -9,3 +9,31 @@ Cette commande lance un serveur de prévisualisation de votre build pour vérifi
 
 Local:   http://localhost:4174/
   ➜  Network: http://192.168.1.78:4174/
+
+
+
+
+
+src/
+├── components/
+│   ├── Atoms/
+│   │   ├── Button/
+│   │   │   └── ButtonUI.tsx
+│   │   ├── Input/
+│   │   │   └── InputUI.tsx
+│   │   └── Label/
+│   │       └── LabelUI.tsx
+│   ├── Molecules/
+│   │   ├── InputField/
+│   │   │   └── InputField.tsx
+│   │   └── SelectField/
+│   │       └── SelectField.tsx
+│   ├── Organisms/
+│   │   └── EmployeeForm/
+│   │       └── EmployeeForm.tsx
+│   ├── Templates/
+│   │   └── FormTemplate/
+│   │       └── FormTemplate.tsx
+│   └── Pages/
+│       ├── CreateEmployeePage.tsx
+│       └── EmployeeListPage.tsx

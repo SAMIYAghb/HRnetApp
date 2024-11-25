@@ -26,6 +26,9 @@ import "modal-labrary/lib/Modal.css";
 
 const EmployeeForm: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+//   Ces fonctions n'ont pas besoin d'être recréées à chaque rendu, car elles dépendent uniquement de l'état local (setIsModalOpen).
+// Cela permet d'éviter des re-rendus inutiles des composants enfants qui recevraient ces fonctions en props.
+// 
   const openModal = useCallback(() => setIsModalOpen(true), []);
   const closeModal = useCallback(() => setIsModalOpen(false), []);
 
@@ -83,7 +86,7 @@ const EmployeeForm: React.FC = () => {
       state: Yup.string().required("State is required"),
     }),
     validateOnBlur: true, // La validation se fait lorsque l'utilisateur quitte un champ
-  validateOnChange: false, // Désactive la validation lors du changementF
+    validateOnChange: false, // Désactive la validation lors du changementF
     onSubmit: (values) => {
       // console.log("Form data", values);
       dispatch(addEmployee(values)); // Dispatch the addEmployee action
@@ -104,6 +107,7 @@ const EmployeeForm: React.FC = () => {
     },
   });
 
+  // useMemo empêche de recalculer ces valeurs à chaque rendu du composant. Les valeurs ne seront recalculées que si les dépendances (departments ou states) changent.
   const departments = useSelector(selectDepartments);
   const departmentOptions = useMemo(
     () =>
